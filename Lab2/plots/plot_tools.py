@@ -33,11 +33,23 @@ def get_double_column_data(filename, folder='data/'):
     with open(folder+filename, 'rb') as csvfile:
         reader = csv.reader(csvfile, delimiter=',')
         data = [row for row in reader]
-    time_offset = -float(data[1][1])
-    time = [float(row[1]) + time_offset for row in data[1:]]
-    C1 = [float(row[2]) for row in data[1:]]
-    C2 = [float(row[3]) for row in data[1:]]
-    last_valid_data = C1.index(0)
+
+    if len(data[0]) == 4:
+        time_offset = -float(data[1][1])
+        time = [float(row[1]) + time_offset for row in data[1:]]
+        C1 = [float(row[2]) for row in data[1:]]
+        C2 = [float(row[3]) for row in data[1:]]
+        last_valid_data = C1.index(0)
+    elif len(data[0]) == 3:
+        time_offset = -float(data[1][0])
+        time = [float(row[0]) + time_offset for row in data[1:]]
+        C1 = [float(row[1]) for row in data[1:]]
+        C2 = [float(row[2]) for row in data[1:]]
+        try:
+            last_valid_data = C1.index(0)
+        except:
+            last_valid_data = len(C1)+1
+
     return (time[:last_valid_data], C1[:last_valid_data], C2[:last_valid_data])
 
 
