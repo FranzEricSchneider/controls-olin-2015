@@ -1,5 +1,6 @@
 import csv
 import matplotlib.pyplot as plt
+import numpy as np
 
 
 def get_all_lines(filename):
@@ -9,9 +10,12 @@ def get_all_lines(filename):
     return lines
 
 
-def plot_points_and_lines(time, data, color='b'):
+def plot_points_and_lines(time, data, color='b', label=None):
     plt.plot(time, data, color, linewidth=0.5)
     plt.plot(time, data, color+'.', markersize=5)
+    if label is not None:
+        plt.plot([time[0], time[1]], [data[0], data[1]],
+                 color=color, label=label, linewidth=2)
 
 
 def get_single_column_data(filename, folder='data/'):
@@ -58,13 +62,21 @@ def get_position_from_potentiometer(data):
 def get_velocity_from_angle(time, data):
     velocity = []
     for i in range(len(data) - 1):
-        new_data = (data[i + 1] - data[i]) / (time[i + 1] - time[i])
-        if i > 0:
-            if abs(new_data - velocity[-1]) > 20:
-                new_data = velocity[-1]
-        velocity.append(new_data)
+        velocity.append( (data[i + 1] - data[i]) / (time[i + 1] - time[i]) )
     velocity.append(velocity[-1])  # Maintains vector length
     return velocity
+
+
+def rm_pot_V_edges(time, data):
+    min_v = 0.0
+    max_v = 5.0
+    offset = 0.20
+    pot_time = [point for point in time]
+    for i in reversed(range(len(data))):
+        if data[i] > max_v - offset or data[i] < min_v + offset:
+            pot_time.pop(i)
+            data.pop(i)
+    return pot_time, data
 
 
 def convert_mV_to_V(data):
@@ -75,3 +87,8 @@ def calculate_current_from_voltage(data):
     R = 0.845
     scalar = 1.568  # Scales current data to match the power supply
     return [(point / R) * scalar for point in data]
+
+
+def moving_average(interval, window_size):
+    window = np.ones(int(window_size))/float(window_size)
+    return np.convolve(interval, window, 'same')
