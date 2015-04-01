@@ -79,10 +79,9 @@ def get_velocity_from_angle(time, data):
     return velocity
 
 
-def rm_pot_V_edges(time, data):
+def rm_pot_V_edges(time, data, offset=0.20):
     min_v = 0.0
     max_v = 5.0
-    offset = 0.20
     pot_time = [point for point in time]
     for i in reversed(range(len(data))):
         if data[i] > max_v - offset or data[i] < min_v + offset:

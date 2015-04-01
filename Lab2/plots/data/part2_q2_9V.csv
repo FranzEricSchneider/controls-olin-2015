@@ -1,8 +1,3 @@
-#Title,Digilent WaveForms Oscilloscope Data
-#Device Name,Analog Discovery
-#Serial Number,SN:210244659266
-#Software Version,2.7.5
-Time (s),C1 (V),C2 (V)
 -5,1.99521630159518,-3.77448208571325
 -4.99875,1.97431527149711,-8.98332511212224
 -4.9975,1.95712248867451,-9.00791169417542
