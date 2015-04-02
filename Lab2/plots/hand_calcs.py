@@ -31,7 +31,7 @@ Dot_Theta_M = np.transpose( np.array([dot_theta_m]) )
 K_tach = np.dot( np.transpose(Dot_Theta), Dot_Theta_M )[0][0] / \
          np.dot( np.transpose(Dot_Theta), Dot_Theta )[0][0]
 print('-------------------------------')
-print('K_{tach} (V/rad)')
+print('*** K_{tach} (V/rad) ***')
 print(K_tach)
 print('-------------------------------')
 
@@ -44,6 +44,10 @@ delta_i_array   = [[3.45,   3.4,    3.305,  3.32,   3.29],
                    [5.11,   5.018,  5.1,    5.034,  5.13],
                    [5.12,   5.016,   5.14,   5.03,   5.13]]
 currents = [np.mean(row) for row in delta_i_array]
+print('-------------------------------')
+print('Current spikes (A)')
+print(currents)
+print('-------------------------------')
 
 
 # Calculating R_m
@@ -52,9 +56,37 @@ Currents = np.transpose( np.array([currents]) )
 R_m = np.dot( np.transpose(Currents), Voltages )[0][0] / \
       np.dot( np.transpose(Currents), Currents )[0][0]
 print('-------------------------------')
-print('R_m (\Omega)')
+print('*** R_m (\Omega) ***')
 print(R_m)
 print('-------------------------------')
 
 
 # Calculating \tau_m
+ten_per_array = [[1.187,    2.5542,     4.0237,     5.4462],
+                 [1.2278,   2.4402,     3.5441,     4.6897],
+                 [1.1674,   2.2758,     3.3607,     4.5389],
+                 [1.8237,   3.0238,     4.1064,     5.2802],
+                 [1.216,    2.3565,     3.4276,     4.4817]]
+ninety_per_array = [[1.1933,   2.5599,      4.0298,     5.452],
+                    [1.2338,   2.4465,      3.5506,     4.7017],
+                    [1.1736,   2.2819,      3.3668,     4.5455],
+                    [1.8299,   3.03,        4.1125,     5.2865],
+                    [1.2219,    2.3629,     3.4337,     4.4883]]
+dt_array = []
+for i in range(len(ten_per_array)):
+    for j in range(len(ten_per_array[i])):
+        dt_array.append(ninety_per_array[i][j] - ten_per_array[i][j])
+dt_avg = np.mean(dt_array)
+tau_m = dt_avg / 2.2
+print('-------------------------------')
+print('\\tau_m (s)')
+print(tau_m)
+print('-------------------------------')
+
+
+# Calculating L_m
+L_m = tau_m * R_m
+print('-------------------------------')
+print('*** L_m (H) ***')
+print(L_m)
+print('-------------------------------')

@@ -10,34 +10,44 @@ def main():
     colors = ['b', 'g', 'r', 'c', 'm']
     filetype = ".csv"
 
-    for i in range(len(colors)):
-        time, current_V, voltage = \
-            get_double_column_data(filename + voltages[i] + filetype)
+    # for i in range(len(colors)):
+    i = 3
+    time, current_V, voltage = \
+        get_double_column_data(filename + voltages[i] + filetype)
 
-        current = calculate_current_from_voltage(current_V)
-        filtered_current = moving_average(current, 3)
+    current = calculate_current_from_voltage(current_V)
+    filtered_current = moving_average(current, 3)
+    ##############################################
+    As = [3.3530000000000002, 4.984, 5.0602, 5.0784000000000002, 5.0872000000000002]
+    A = As[i]
+    plot_points_and_lines(time, filtered_current)
+    plt.plot([0, 10], [0.1*A, 0.1*A])
+    plt.plot([0, 10], [0.9*A, 0.9*A])
+    plt.plot([0, 10], [-0.1*A, -0.1*A])
+    plt.plot([0, 10], [-0.9*A, -0.9*A])
+    ##############################################
 
-        plt.subplot(2, 1, 1)
-        plt.plot(time, voltage, color=colors[i], linewidth=1)
-        plt.plot([time[0], time[1]],
-                 [voltage[0], voltage[1]],
-                 color=colors[i], label=voltages[i], linewidth=2)
-        plt.xlabel('Time (s)')
-        plt.ylabel('Motor Voltage (V)')
-        plt.title('Motor Voltage Driven in Square Wave')
+    #     plt.subplot(2, 1, 1)
+    #     plt.plot(time, voltage, color=colors[i], linewidth=1)
+    #     plt.plot([time[0], time[1]],
+    #              [voltage[0], voltage[1]],
+    #              color=colors[i], label=voltages[i], linewidth=2)
+    #     plt.xlabel('Time (s)')
+    #     plt.ylabel('Motor Voltage (V)')
+    #     plt.title('Motor Voltage Driven in Square Wave')
 
-        plt.subplot(2, 1, 2)
-        plt.plot(time, filtered_current, color=colors[i], linewidth=1)
-        plt.plot([time[0], time[1]],
-                 [filtered_current[0], filtered_current[1]],
-                 color=colors[i], label=voltages[i], linewidth=2)
-        plt.xlabel('Time (s)')
-        plt.ylabel('Current (A)')
-        plt.title('Current as Motor is Driven in Voltage Square Wave')
-    plt.subplot(2, 1, 1)
-    plt.legend()
-    plt.subplot(2, 1, 2)
-    plt.legend()
+    #     plt.subplot(2, 1, 2)
+    #     plt.plot(time, filtered_current, color=colors[i], linewidth=1)
+    #     plt.plot([time[0], time[1]],
+    #              [filtered_current[0], filtered_current[1]],
+    #              color=colors[i], label=voltages[i], linewidth=2)
+    #     plt.xlabel('Time (s)')
+    #     plt.ylabel('Current (A)')
+    #     plt.title('Current as Motor is Driven in Voltage Square Wave')
+    # plt.subplot(2, 1, 1)
+    # plt.legend()
+    # plt.subplot(2, 1, 2)
+    # plt.legend()
     plt.show()
 
 
