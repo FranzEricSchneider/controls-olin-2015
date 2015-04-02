@@ -15,7 +15,7 @@ def main():
             get_double_column_data(filename + voltages[i] + filetype)
 
         current = calculate_current_from_voltage(current_V)
-        filtered_current = moving_average(current, 30)
+        filtered_current = moving_average(current, 3)
 
         plt.subplot(2, 1, 1)
         plt.plot(time, voltage, color=colors[i], linewidth=1)

@@ -96,7 +96,7 @@ def convert_mV_to_V(data):
 
 def calculate_current_from_voltage(data):
     R = 0.845
-    scalar = 1.568  # Scales current data to match the power supply
+    scalar = 1.6  # Scales current data to match the power supply
     return [(point / R) * scalar for point in data]
 
 

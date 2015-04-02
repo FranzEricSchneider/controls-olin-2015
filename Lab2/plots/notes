@@ -1,0 +1,39 @@
+-----------------------------------------------------------
+\theta_m 		is in plot_1_2
+\theta 			is in plot_1_2, found by hand
+OPERATION IS BY HAND
+thrfr \k_tach	is in hand calcs after looking at plot_2_1
+
+-----------------------------------------------------------
+v_m 			is in plot_2_1
+i_m 			is in plot_2_1
+OPERATION IS BY HAND
+thrfr \R_m		is in hand calcs after looking at plot_2_1
+
+-----------------------------------------------------------
+v_m 			is in plot_2_1
+i_m 			is in plot_2_1
+OPERATION IS BY HAND
+thrfr \L_m		is in hand calcs after looking at plot_2_1
+
+-----------------------------------------------------------
+\theta_m 		is in plot_1_2
+I_m 			is in plot_1_2
+V_m 			is in plot_1_2
+OPERATION IS BY HAND
+thrfr \k_e		is in hand calcs after looking at plot_1_2
+
+-----------------------------------------------------------
+n (gear ratio)	No idea
+
+-----------------------------------------------------------
+K_p				is in hand calcs after looking at plot_1_2
+
+-----------------------------------------------------------
+J_f				is in Solidworks with flywheel CAD
+
+-----------------------------------------------------------
+K_t and J_m		Do some math first and include friction
+
+-----------------------------------------------------------
+\tau_m			is in hand calcs after looking at plot_2_2

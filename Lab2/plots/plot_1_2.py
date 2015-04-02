@@ -1,3 +1,4 @@
+from numpy import mean
 import matplotlib.pyplot as plt
 
 from plot_tools import *
@@ -38,7 +39,8 @@ def main():
         plt.xlabel('Time (s)')
         plt.ylabel('Current (A)')
         plt.title('Current as Motor is Driven at DC Voltages')
-        # print("Delta V is 5 volts".upper())
+        print("Average velocity for %s is %f" % (voltages[i],
+                                                 mean(filtered_velocity)))
     plt.subplot(2, 1, 1)
     plt.legend()
     plt.subplot(2, 1, 2)
