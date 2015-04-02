@@ -24,7 +24,6 @@ def main():
         filtered_current = moving_average(current, 30)
 
         plt.subplot(2, 1, 1)
-        # print colors[i]
         plot_points_and_lines(pot_time, filtered_velocity,
                               color=colors[i], label=voltages[i])
         plt.xlabel('Time (s)')
@@ -32,7 +31,7 @@ def main():
         plt.title('Velocity as Motor is Driven at DC Voltages')
 
         plt.subplot(2, 1, 2)
-        plt.plot(time, filtered_current, color=colors[i], linewidth=0.25)
+        plt.plot(time, filtered_current, color=colors[i], linewidth=1)
         plt.plot([time[0], time[1]],
                  [filtered_current[0], filtered_current[1]],
                  color=colors[i], label=voltages[i], linewidth=2)
