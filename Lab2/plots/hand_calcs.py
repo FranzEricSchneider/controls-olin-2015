@@ -1,8 +1,9 @@
+import matplotlib.pyplot as plt
 from numpy import pi
 import numpy as np
 
 
-# Calculating ACTUAL \dot{\theta}
+# Calculating ACTUAL \dot{\theta} (from plot_1_2)
 voltages    = [5,       6,      7,      8,      9,      10]#11,     12]
 revs        = [7,       7,      9,      14,     15,     16]
 start_time  = [0.4312,  0.4862, 0.375,  0.2837, 0.1775, 0.2188]
@@ -36,8 +37,9 @@ print(K_tach)
 print('-------------------------------')
 
 
-# Calculating V_m and I_m
+# Calculating V_m and I_m (from plot_2_1)
 voltages        = [6,       9,      10,     11,     12]
+#   Current spikes
 delta_i_array   = [[3.45,   3.4,    3.305,  3.32,   3.29],
                    [5.13,   4.93,   4.93,   4.9,    5.03],
                    [5.165,  4.955,  5.028,  4.985,  5.168],
@@ -50,7 +52,7 @@ print(currents)
 print('-------------------------------')
 
 
-# Calculating R_m
+# Calculating R_m (from plot_2_1)
 Voltages = np.transpose( np.array([voltages]) )
 Currents = np.transpose( np.array([currents]) )
 R_m = np.dot( np.transpose(Currents), Voltages )[0][0] / \
@@ -61,7 +63,7 @@ print(R_m)
 print('-------------------------------')
 
 
-# Calculating \tau_m
+# Calculating \tau_m (from plot_2_1)
 ten_per_array = [[1.187,    2.5542,     4.0237,     5.4462],
                  [1.2278,   2.4402,     3.5441,     4.6897],
                  [1.1674,   2.2758,     3.3607,     4.5389],
@@ -89,4 +91,24 @@ L_m = tau_m * R_m
 print('-------------------------------')
 print('*** L_m (H) ***')
 print(L_m)
+print('-------------------------------')
+
+
+# Calculating v_emf (from plot_1_2)
+voltages        = [5,           6,          7,          8,          9,          10]#11,     12]
+steady_currents = [0.229466,    0.237100,   0.245455,   0.253681,   0.254916,   0.263335]
+v_emf = [V - I * R_m for V, I in zip(voltages, steady_currents)]
+print('-------------------------------')
+print('V_{emf} (V)')
+print(v_emf)
+print('-------------------------------')
+
+
+# Calculating K_e
+V_Emf = np.transpose( np.array([v_emf]) )
+K_e = np.dot( np.transpose(Dot_Theta), V_Emf )[0][0] / \
+      np.dot( np.transpose(Dot_Theta), Dot_Theta )[0][0]
+print('-------------------------------')
+print('*** K_e (V-s/rad) ***')
+print(K_e)
 print('-------------------------------')

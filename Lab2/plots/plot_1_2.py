@@ -39,7 +39,9 @@ def main():
         plt.xlabel('Time (s)')
         plt.ylabel('Current (A)')
         plt.title('Current as Motor is Driven at DC Voltages')
-        print("Average velocity for %s is %f" % (voltages[i],
+        print("Average current for %s is %f" % (voltages[i],
+                                                mean(filtered_current)))
+        print("Average volts/second for %s is %f" % (voltages[i],
                                                  mean(filtered_velocity)))
     plt.subplot(2, 1, 1)
     plt.legend()
