@@ -34,3 +34,27 @@ print('-------------------------------')
 print('K_{tach} (V/rad)')
 print(K_tach)
 print('-------------------------------')
+
+
+# Calculating V_m and I_m
+voltages        = [6,       9,      10,     11,     12]
+delta_i_array   = [[3.45,   3.4,    3.305,  3.32,   3.29],
+                   [5.13,   4.93,   4.93,   4.9,    5.03],
+                   [5.165,  4.955,  5.028,  4.985,  5.168],
+                   [5.11,   5.018,  5.1,    5.034,  5.13],
+                   [5.12,   5.016,   5.14,   5.03,   5.13]]
+currents = [np.mean(row) for row in delta_i_array]
+
+
+# Calculating R_m
+Voltages = np.transpose( np.array([voltages]) )
+Currents = np.transpose( np.array([currents]) )
+R_m = np.dot( np.transpose(Currents), Voltages )[0][0] / \
+      np.dot( np.transpose(Currents), Currents )[0][0]
+print('-------------------------------')
+print('R_m (\Omega)')
+print(R_m)
+print('-------------------------------')
+
+
+# Calculating \tau_m
