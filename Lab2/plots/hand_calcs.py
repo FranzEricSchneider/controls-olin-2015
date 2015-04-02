@@ -63,7 +63,7 @@ print(R_m)
 print('-------------------------------')
 
 
-# Calculating \tau_m (from plot_2_1)
+# Calculating \tau_e (from plot_2_1)
 ten_per_array = [[1.187,    2.5542,     4.0237,     5.4462],
                  [1.2278,   2.4402,     3.5441,     4.6897],
                  [1.1674,   2.2758,     3.3607,     4.5389],
@@ -79,15 +79,15 @@ for i in range(len(ten_per_array)):
     for j in range(len(ten_per_array[i])):
         dt_array.append(ninety_per_array[i][j] - ten_per_array[i][j])
 dt_avg = np.mean(dt_array)
-tau_m = dt_avg / 2.2
+tau_e = dt_avg / 2.2
 print('-------------------------------')
-print('\\tau_m (s)')
-print(tau_m)
+print('\\tau_e (s)')
+print(tau_e)
 print('-------------------------------')
 
 
 # Calculating L_m
-L_m = tau_m * R_m
+L_m = tau_e * R_m
 print('-------------------------------')
 print('*** L_m (H) ***')
 print(L_m)
@@ -111,4 +111,41 @@ K_e = np.dot( np.transpose(Dot_Theta), V_Emf )[0][0] / \
 print('-------------------------------')
 print('*** K_e (V-s/rad) ***')
 print(K_e)
+print('-------------------------------')
+
+
+# Calculating n (or not)
+print('-------------------------------')
+print('*** Gear ratio n (unitless) ***')
+print('Meaningless. 100+, because friction?')
+print('-------------------------------')
+
+
+# Calculating K_p
+print('-------------------------------')
+print('*** K_p - Scale factor for potentiometer - (V/rad) ***')
+print(5.0 / (2 * pi))
+print('-------------------------------')
+
+
+# Calculating \tau_m (from plot_2_2)
+ten_per_array = [[1.33,    2.71],
+                 [0.791,   1.778],
+                 [3.067,   4.2165],
+                 [0.7875,  1.7025],
+                 [2.916,    2.049]]
+ninety_per_array = [[1.368,   2.753],
+                    [0.835,   1.823],
+                    [3.158,   4.232],
+                    [0.830,   1.752],
+                    [2.961,   2.087]]
+dt_array = []
+for i in range(len(ten_per_array)):
+    for j in range(len(ten_per_array[i])):
+        dt_array.append(ninety_per_array[i][j] - ten_per_array[i][j])
+dt_avg = np.mean(dt_array)
+tau_m = dt_avg / 2.2
+print('-------------------------------')
+print('*** \\tau_m (s) ***')
+print(tau_m)
 print('-------------------------------')
