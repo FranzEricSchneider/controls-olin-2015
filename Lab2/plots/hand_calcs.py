@@ -128,6 +128,58 @@ print(5.0 / (2 * pi))
 print('-------------------------------')
 
 
+# Calculateing J_F
+print('-------------------------------')
+print('*** J_F (Kg-m^2) ***')
+J_F = 0.0010065  # kg-m^2
+print(J_F)
+print('-------------------------------')
+
+
+# Calculating K_t and J_m from plot_2_3 and plot_1_3
+currents_1_3 = [400,    450,    500,    550,    600]  # in mA
+alpha_m_1_3  = [23.0,   28.75,  30.25,  42.0,   51.0]  # V/s, not velocity
+alpha_1_3 = [point / K_tach for point in alpha_m_1_3]
+
+Currents_1_3 = np.transpose( np.array([currents_1_3]) )
+Alpha_1_3 = np.transpose( np.array([alpha_1_3]) )
+K_t_J_m = np.dot( np.transpose(Currents_1_3), Alpha_1_3 )[0][0] / \
+          np.dot( np.transpose(Currents_1_3), Currents_1_3 )[0][0]
+print('-------------------------------')
+print('K_t / J_m')
+print(K_t_J_m)  # phi
+print('-------------------------------')
+
+
+# Calculating K_t, J_m, and J_F together from plot_2_3
+currents_2_3 = [250,    280,    300,    330]  # in mA
+alpha_m_2_3  = [13.75,  17.85,  26.6,   27.3]  # V/s, not velocity
+alpha_2_3 = [point / K_tach for point in alpha_m_2_3]
+
+Currents_2_3 = np.transpose( np.array([currents_2_3]) )
+Alpha_2_3 = np.transpose( np.array([alpha_2_3]) )
+K_t_J_m_J_F = np.dot( np.transpose(Currents_2_3), Alpha_2_3 )[0][0] / \
+              np.dot( np.transpose(Currents_2_3), Currents_2_3 )[0][0]
+print('-------------------------------')
+print('K_t / (J_m + J_F)')
+print(K_t_J_m_J_F)  # psi
+print('-------------------------------')
+
+
+# Calculating J_m and K_t
+J_m = K_t_J_m_J_F * J_F / (K_t_J_m - K_t_J_m_J_F)
+K_t = J_m * K_t_J_m_J_F
+print('-------------------------------')
+print('*** J_m ***')
+print(J_m)
+print('-------------------------------')
+print('-------------------------------')
+print('*** K_t ***')
+print(K_t)
+print('-------------------------------')
+
+
+
 # Calculating \tau_m (from plot_2_2)
 ten_per_array = [[1.33,    2.71],
                  [0.791,   1.778],
@@ -148,11 +200,4 @@ tau_m = dt_avg / 2.2
 print('-------------------------------')
 print('*** \\tau_m (s) ***')
 print(tau_m)
-print('-------------------------------')
-
-
-# Calculateing J_F
-print('-------------------------------')
-print('*** J_F (Kg-m^2) ***')
-print(0.0010065)
 print('-------------------------------')

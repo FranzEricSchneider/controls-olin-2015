@@ -10,8 +10,8 @@ def main():
     colors = ['b', 'g', 'r', 'c', 'm']
     filetype = ".csv"
 
-    # for i in range(len(colors)):
-    for i in [0, 4]:
+    for i in range(len(colors)):
+    # for i in [0, 4]:
         time, current_mV, pot_V = \
             get_double_column_data(filename + voltages[i] + filetype)
         pot_time, pot_V = rm_pot_V_edges(time, pot_V)
@@ -26,12 +26,13 @@ def main():
         current = calculate_current_from_voltage(current_V)
         filtered_current = moving_average(current, 30)
 
-        if i == 0:
-            plt.subplot(2, 2, 1)
-            plt.title('Velocity as Motor is Driven at 400 mA')
-        else:
-            plt.subplot(2, 2, 3)
-            plt.title('Velocity as Motor is Driven at 600 mA')
+        # if i == 0:
+            # plt.subplot(2, 2, 1)
+        #     plt.title('Velocity as Motor is Driven at 400 mA')
+        # else:
+        #     plt.subplot(2, 2, 3)
+        #     plt.title('Velocity as Motor is Driven at 600 mA')
+        plt.subplot(2, 1, 1)
         plt.plot(pot_time, filtered_velocity, color=colors[i], linewidth=1)
         plt.plot([pot_time[0], pot_time[1]],
                  [filtered_velocity[0], filtered_velocity[1]],
@@ -39,18 +40,23 @@ def main():
         plt.xlabel('Time (s)')
         plt.ylabel('Change in Pot V over Time (V/s)')
 
-        if i == 0:
-            plt.subplot(2, 2, 2)
-            plt.title('Current as Motor is Driven at 400 mA')
-        else:
-            plt.subplot(2, 2, 4)
-            plt.title('Current as Motor is Driven at 600 mA')
+        # if i == 0:
+        #     plt.subplot(2, 2, 2)
+        #     plt.title('Current as Motor is Driven at 400 mA')
+        # else:
+        #     plt.subplot(2, 2, 4)
+        #     plt.title('Current as Motor is Driven at 600 mA')
+        plt.subplot(2, 1, 2)
         plt.plot(time, filtered_current, color=colors[i], linewidth=1)
         plt.plot([time[0], time[1]],
                  [filtered_current[0], filtered_current[1]],
                  color=colors[i], label=voltages[i], linewidth=2)
         plt.xlabel('Time (s)')
         plt.ylabel('Current (A)')
+    plt.subplot(2, 1, 1)
+    plt.legend()
+    plt.subplot(2, 1, 2)
+    plt.legend()
     plt.show()
 
 
